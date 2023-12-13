@@ -1,6 +1,6 @@
-﻿using WebApplication1.Models;
+﻿using ToDoApp.WebApi.Models;
 
-namespace WebApplication1.Services
+namespace ToDoApp.WebApi.Data.Repositories
 {
     public interface IUserRepository
     {

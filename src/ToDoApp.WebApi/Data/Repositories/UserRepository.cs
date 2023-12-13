@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using WebApplication1.Data;
-using WebApplication1.Models;
+using ToDoApp.WebApi.Data;
+using ToDoApp.WebApi.Models;
 
-namespace WebApplication1.Services
+namespace ToDoApp.WebApi.Data.Repositories
 {
     public class UserRepository : IUserRepository
     {

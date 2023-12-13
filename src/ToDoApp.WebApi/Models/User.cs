@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 
-namespace WebApplication1.Models
+namespace ToDoApp.WebApi.Models
 {
     public class User
     {

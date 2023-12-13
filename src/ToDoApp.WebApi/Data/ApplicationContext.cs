@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using WebApplication1.Models;
+using ToDoApp.WebApi.Models;
 
-namespace WebApplication1.Data
+namespace ToDoApp.WebApi.Data
 {
     public class ApplicationContext : DbContext
     {

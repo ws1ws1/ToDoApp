@@ -1,41 +1,38 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
-using System;
-using WebApplication1.Models;
-using WebApplication1.Services;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Distributed;
+using System.Text.Json;
 using Microsoft.AspNetCore.Authentication;
+using ToDoApp.WebApi.Data.Repositories;
+using ToDoApp.WebApi.Models;
+using ToDoApp.WebApi.Filters;
 
-namespace WebApplication1.Controllers
+
+namespace ToDoApp.WebApi.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class UserController : ControllerBase
     {
-        IUserRepository _userRepository;
-        public UserController(IUserRepository userRepository)
+        private IUserRepository _userRepository;
+        private IDistributedCache _distributedCache;
+
+        public UserController(IUserRepository userRepository, IDistributedCache distributedCache)
         {
             _userRepository = userRepository;
+            _distributedCache = distributedCache;
         }
 
         [HttpPost]
         public async Task<IActionResult> Post(User user)
         {
             if (ModelState.IsValid)
-            {                
-                var claims = new List<Claim> { new Claim(ClaimTypes.Name, user.Email) };
-
-                // создаем объект ClaimsIdentity
-                ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-
-                // установка аутентификационных куки
-                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));                
-
-                HttpContext.Session.SetString("UserSession", user.Email);
-
+            {
                 _userRepository.Create(user);
+
+                HttpContext.Session.SetInt32("Session_Id", user.Id);
+
+                var userJson = JsonSerializer.Serialize(user);                 
+                HttpContext.Session.SetString("Session_Data", userJson);
 
                 return Ok();
             }
@@ -44,15 +41,13 @@ namespace WebApplication1.Controllers
         }
 
         [HttpGet]
+        [SessionFilter]
         public async Task<IActionResult> Get()
         {
-            if (HttpContext.Session.GetString("UserSession") != null)
-            {
-                var user = await _userRepository.GetByEmailAsync(HttpContext.Session.GetString("UserSession")!);
-                return Ok(user);
-            }
+            var str = Content("Id");
 
-            return Unauthorized();
+            return Ok();
+
         }
     }
 }

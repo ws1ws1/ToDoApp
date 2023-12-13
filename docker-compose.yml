@@ -6,3 +6,11 @@ services:
     build:
       context: .
       dockerfile: src\ToDoApp.WebApi\Dockerfile
+    ports:
+    - 5000:80
+    depends_on: 
+    - redis
+  redis:
+    image: redis
+    ports: 
+    - 6379:6379
