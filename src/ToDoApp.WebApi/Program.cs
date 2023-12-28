@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using ToDoApp.WebApi.Data;
 using ToDoApp.WebApi.Data.Repositories;
+using ToDoApp.WebApi.Middlewares;
+using ToDoApp.WebApi.Services.Session;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,8 +15,6 @@ builder.Services.AddSwaggerGen();
 
 var connectionString = builder.Configuration.GetConnectionString("AppDbConnectionString");
 builder.Services.AddDbContext<ApplicationContext>(options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
-
-builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 builder.Services.AddCors(options =>
 {
@@ -42,6 +42,11 @@ builder.Services.AddStackExchangeRedisCache(options =>
     string? connection = builder.Configuration.GetConnectionString("Redis");
     options.Configuration = connection;
 });
+
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserSession, UserSession>();
+
+builder.Services.AddTransient<GlobalExceptionHandlingMiddleware>();
 
 var app = builder.Build();
 

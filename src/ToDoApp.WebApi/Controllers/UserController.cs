@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Authentication;
 using ToDoApp.WebApi.Data.Repositories;
 using ToDoApp.WebApi.Models;
 using ToDoApp.WebApi.Filters;
-
+using ToDoApp.WebApi.Services.Session;
 
 namespace ToDoApp.WebApi.Controllers
 {
@@ -14,12 +14,12 @@ namespace ToDoApp.WebApi.Controllers
     public class UserController : ControllerBase
     {
         private IUserRepository _userRepository;
-        private IDistributedCache _distributedCache;
+        private readonly IUserSession _userSession;
 
-        public UserController(IUserRepository userRepository, IDistributedCache distributedCache)
+        public UserController(IUserRepository userRepository, IUserSession userSession)
         {
             _userRepository = userRepository;
-            _distributedCache = distributedCache;
+            _userSession = userSession;
         }
 
         [HttpPost]
@@ -28,11 +28,7 @@ namespace ToDoApp.WebApi.Controllers
             if (ModelState.IsValid)
             {
                 _userRepository.Create(user);
-
-                HttpContext.Session.SetInt32("Session_Id", user.Id);
-
-                var userJson = JsonSerializer.Serialize(user);                 
-                HttpContext.Session.SetString("Session_Data", userJson);
+                _userSession.Add(user);
 
                 return Ok();
             }
@@ -44,9 +40,9 @@ namespace ToDoApp.WebApi.Controllers
         [SessionFilter]
         public async Task<IActionResult> Get()
         {
-            var str = Content("Id");
+            var user = _userSession.GetCurrentUser();
 
-            return Ok();
+            return Ok(user);
 
         }
     }

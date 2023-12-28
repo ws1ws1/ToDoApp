@@ -7,13 +7,13 @@ namespace ToDoApp.WebApi.Filters
     {
         public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
-            if (context.HttpContext.Session.GetInt32("Session_Id") == null)
+            if (context.HttpContext.Session.GetString("session_data") == null)
             {
                 context.Result = new UnauthorizedResult();          
             }
             else
             {
-                context.Result = new OkResult();
+                await next();
             }
         }
     }
