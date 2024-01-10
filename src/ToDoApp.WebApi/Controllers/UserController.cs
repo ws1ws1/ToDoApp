@@ -1,7 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Distributed;
-using System.Text.Json;
-using Microsoft.AspNetCore.Authentication;
 using ToDoApp.WebApi.Data.Repositories;
 using ToDoApp.WebApi.Models;
 using ToDoApp.WebApi.Filters;
@@ -14,7 +11,7 @@ namespace ToDoApp.WebApi.Controllers
     public class UserController : ControllerBase
     {
         private IUserRepository _userRepository;
-        private readonly IUserSession _userSession;
+        private IUserSession _userSession;
 
         public UserController(IUserRepository userRepository, IUserSession userSession)
         {
