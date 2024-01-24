@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using ToDoApp.WebApi.Data;
 using ToDoApp.WebApi.Data.Repositories;
 using ToDoApp.WebApi.Middlewares;
+using ToDoApp.WebApi.Services;
 using ToDoApp.WebApi.Services.Session;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -47,10 +48,19 @@ builder.Services.AddStackExchangeRedisCache(options =>
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserSession, UserSession>();
+builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
 
 builder.Services.AddTransient<GlobalExceptionHandlingMiddleware>();
 
 var app = builder.Build();
+
+/*
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetService<ApplicationContext>();
+    context.Database.Migrate();
+}
+*/
 
 app.UseCors("AllowAll");
 
