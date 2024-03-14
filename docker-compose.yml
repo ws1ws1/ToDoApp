@@ -2,29 +2,22 @@ version: '3.4'
 
 services:
   todoapp.webapi:
+    depends_on:
+      - postgres
+      - redis
     image: ${DOCKER_REGISTRY-}todoappwebapi
     build:
       context: .
-      dockerfile: src\ToDoApp.WebApi\Dockerfile
-    ports:
-    - "5000:80"
-    depends_on: 
-    - redis
-  redis:
-    image: redis
-    ports: 
-    - 6379:6379
-  mysql_db:
-    image: mysql
+      dockerfile: src/ToDoApp.WebApi/Dockerfile
+
+  postgres:
+    image: postgres
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: ToDo
-    ports:
-      - "3307:3307"
-    volumes:
-      - mysql_db:/var/lib/mysql
-volumes:
-  mysql_db:
-    driver: local
-      
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: ToDo
+
+  redis:
+    image: redis
+    restart: always

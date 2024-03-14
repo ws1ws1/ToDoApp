@@ -17,7 +17,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddHttpContextAccessor();
 
 var connectionString = builder.Configuration.GetConnectionString("AppDbConnectionString");
-builder.Services.AddDbContext<ApplicationContext>(options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+builder.Services.AddDbContext<ApplicationContext>(options => options.UseNpgsql(connectionString));
 
 builder.Services.AddCors(options =>
 {
@@ -54,13 +54,13 @@ builder.Services.AddTransient<GlobalExceptionHandlingMiddleware>();
 
 var app = builder.Build();
 
-/*
+
 using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetService<ApplicationContext>();
-    context.Database.Migrate();
+    context!.Database.Migrate();
 }
-*/
+
 
 app.UseCors("AllowAll");
 
