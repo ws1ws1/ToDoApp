@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ToDoApp.WebApi.Data;
 using ToDoApp.WebApi.Models;
 
 namespace ToDoApp.WebApi.Data.Repositories
@@ -13,15 +12,16 @@ namespace ToDoApp.WebApi.Data.Repositories
             _db = db;
         }
 
-        public void Create(User user)
+        public async Task Create(User user)
         {
             _db.Users.Add(user);
-            _db.SaveChanges();
+            await _db.SaveChangesAsync();
         }
 
-        public User GetById(int id)
+        public async Task<User> GetById(int id)
         {
-            return _db.Users.SingleOrDefault(u => u.Id == id)!;
+            var user = await _db.Users.SingleOrDefaultAsync(x => x.Id == id);
+            return user!;
         }
 
         public async Task<User> GetByEmailAsync(string email)

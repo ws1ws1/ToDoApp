@@ -1,11 +1,11 @@
-﻿using ToDoApp.WebApi.Models;
+﻿using ToDoApp.WebApi.DTO;
 
 namespace ToDoApp.WebApi.Services.Session
 {
     public interface IUserSession
     {
-        public void Add(User user);
+        public Task Add(UserSessionCash user);
 
-        public string GetCurrentUser();
+        public Task<UserSessionCash> GetCurrentUser();
     }
 }

@@ -7,7 +7,7 @@ namespace ToDoApp.WebApi.Filters
     {
         public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
-            if (context.HttpContext.Session.GetString("session_data") == null)
+            if (context.HttpContext.Session.GetString("UserSessionId") == null)
             {
                 context.Result = new UnauthorizedResult();          
             }

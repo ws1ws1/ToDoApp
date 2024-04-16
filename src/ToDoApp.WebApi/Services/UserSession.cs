@@ -1,4 +1,6 @@
-﻿using System.Text.Json;
+﻿using Microsoft.Extensions.Caching.Distributed;
+using System.Text.Json;
+using ToDoApp.WebApi.DTO;
 using ToDoApp.WebApi.Models;
 
 namespace ToDoApp.WebApi.Services.Session
@@ -6,20 +8,32 @@ namespace ToDoApp.WebApi.Services.Session
     public class UserSession : IUserSession
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IDistributedCache _distributedCache;
 
-        public UserSession(IHttpContextAccessor httpContextAccessor) => _httpContextAccessor = httpContextAccessor;
-
-        public void Add(User user)
+        public UserSession(IHttpContextAccessor httpContextAccessor, IDistributedCache distributedCache)
         {
-            var json = JsonSerializer.Serialize(user);
-            _httpContextAccessor.HttpContext.Session.SetString("session_data", json);
+            _httpContextAccessor = httpContextAccessor;
+            _distributedCache = distributedCache;
         }
 
-        public string GetCurrentUser()
+        public async Task Add(UserSessionCash user)
         {
-            var user = _httpContextAccessor.HttpContext.Session.GetString("session_data");
+            var sessionId = Guid.NewGuid().ToString();
+            _httpContextAccessor.HttpContext!.Session.SetString("UserSessionId", sessionId);
 
-            return user;
+            var userJson = JsonSerializer.Serialize(user);
+            await _distributedCache.SetStringAsync(sessionId, userJson);
+        }
+
+        public async Task<UserSessionCash> GetCurrentUser()
+        {
+            var userSessionId = _httpContextAccessor.HttpContext!.Session.GetString("UserSessionId");
+
+            var jsonUserSession = await _distributedCache.GetStringAsync(userSessionId!);
+
+            var userSession = JsonSerializer.Deserialize<UserSessionCash>(jsonUserSession!);
+
+            return userSession!;
         }
     }
 }

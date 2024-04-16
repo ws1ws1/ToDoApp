@@ -4,9 +4,9 @@ namespace ToDoApp.WebApi.Data.Repositories
 {
     public interface IUserRepository
     {
-        void Create(User user);
+        Task Create(User user);
 
-        User GetById(int id);
+        Task<User> GetById(int id);
 
         Task<User> GetByEmailAsync(string email);
     }

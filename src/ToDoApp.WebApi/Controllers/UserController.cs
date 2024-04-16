@@ -5,6 +5,7 @@ using ToDoApp.WebApi.Filters;
 using ToDoApp.WebApi.Services.Session;
 using ToDoApp.WebApi.Services;
 using ToDoApp.WebApi.DTO;
+using Microsoft.Extensions.Caching.Distributed;
 
 namespace ToDoApp.WebApi.Controllers
 {
@@ -24,16 +25,17 @@ namespace ToDoApp.WebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(UserRegistrationDTO userDTO)
+        public async Task<IActionResult> Post(UserRegistration userRegistration)
         {
             if (ModelState.IsValid)
             {
-                var passwordHashString = _passwordHasher.Generate(userDTO.Password);
+                var passwordHashString = _passwordHasher.Generate(userRegistration.Password);
 
-                var user = new User { Email = userDTO.Email, PasswordHash = passwordHashString };
+                var user = new User { Email = userRegistration.Email, PasswordHash = passwordHashString };
+                await _userRepository.Create(user);
 
-                _userRepository.Create(user);
-                _userSession.Add(user);
+                var userSessionCash = new UserSessionCash { Email = userRegistration.Email };
+                await _userSession.Add(userSessionCash);
 
                 return Ok();
             }
@@ -45,7 +47,7 @@ namespace ToDoApp.WebApi.Controllers
         [SessionFilter]
         public async Task<IActionResult> Get()
         {
-            var user = _userSession.GetCurrentUser();
+            var user = await _userSession.GetCurrentUser();
 
             return Ok(user);
 
