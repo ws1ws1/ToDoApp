@@ -20,4 +20,4 @@ services:
 
   redis:
     image: redis
-    restart: always
+    restart: always 

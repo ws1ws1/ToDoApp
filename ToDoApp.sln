@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoApp.EmailSender", "src\
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{C4001168-3450-4787-91A3-71D7DF6F3796}"
 EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "ToDoApp.ReactClient", "src\ToDoApp.ReactClient\ToDoApp.ReactClient.esproj", "{83AB92A1-0300-42FA-8239-56F94858AD9D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,12 @@ Global
 		{C4001168-3450-4787-91A3-71D7DF6F3796}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4001168-3450-4787-91A3-71D7DF6F3796}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4001168-3450-4787-91A3-71D7DF6F3796}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83AB92A1-0300-42FA-8239-56F94858AD9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83AB92A1-0300-42FA-8239-56F94858AD9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83AB92A1-0300-42FA-8239-56F94858AD9D}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{83AB92A1-0300-42FA-8239-56F94858AD9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83AB92A1-0300-42FA-8239-56F94858AD9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83AB92A1-0300-42FA-8239-56F94858AD9D}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -46,6 +54,7 @@ Global
 		{E8D8F332-20F0-44F5-87A6-4A51174FA160} = {FBE75B21-0A95-4B40-B115-AB3329B6DD4E}
 		{CCA21BD2-C052-407F-AB60-8E34D1A7E0C2} = {FBE75B21-0A95-4B40-B115-AB3329B6DD4E}
 		{C4001168-3450-4787-91A3-71D7DF6F3796} = {B1D37221-85AB-45A5-9C1A-57E63D73C90D}
+		{83AB92A1-0300-42FA-8239-56F94858AD9D} = {FBE75B21-0A95-4B40-B115-AB3329B6DD4E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D3969DBF-0132-4E06-80DE-0B1856F86269}

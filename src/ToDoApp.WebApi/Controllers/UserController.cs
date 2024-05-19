@@ -5,7 +5,6 @@ using ToDoApp.WebApi.Filters;
 using ToDoApp.WebApi.Services.Session;
 using ToDoApp.WebApi.Services;
 using ToDoApp.WebApi.DTO;
-using Microsoft.Extensions.Caching.Distributed;
 
 namespace ToDoApp.WebApi.Controllers
 {
@@ -29,6 +28,13 @@ namespace ToDoApp.WebApi.Controllers
         {
             if (ModelState.IsValid)
             {
+                var oldUser = await _userRepository.GetByEmailAsync(userRegistration.Email);
+
+                if (oldUser != null)
+                {
+                    return BadRequest("This Email exists");
+                }
+
                 var passwordHashString = _passwordHasher.Generate(userRegistration.Password);
 
                 var user = new User { Email = userRegistration.Email, PasswordHash = passwordHashString };
