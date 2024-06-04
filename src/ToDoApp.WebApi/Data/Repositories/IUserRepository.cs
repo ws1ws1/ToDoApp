@@ -6,8 +6,8 @@ namespace ToDoApp.WebApi.Data.Repositories
     {
         Task Create(User user);
 
-        Task<User> GetById(int id);
+        Task<User?> GetByIdAsync(int id);
 
-        Task<User> GetByEmailAsync(string email);
+        Task<User?> GetByEmailAsync(string email);
     }
 }

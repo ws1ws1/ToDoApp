@@ -18,16 +18,16 @@ namespace ToDoApp.WebApi.Data.Repositories
             await _db.SaveChangesAsync();
         }
 
-        public async Task<User> GetById(int id)
+        public async Task<User?> GetByIdAsync(int id)
         {
             var user = await _db.Users.SingleOrDefaultAsync(x => x.Id == id);
-            return user!;
+            return user;
         }
 
-        public async Task<User> GetByEmailAsync(string email)
+        public async Task<User?> GetByEmailAsync(string email)
         {
             var user = await _db.Users.FirstOrDefaultAsync(user => user.Email == email);
-            return user!;
+            return user;
         }
     }
 }
