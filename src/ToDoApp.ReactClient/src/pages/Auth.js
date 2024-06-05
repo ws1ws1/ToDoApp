@@ -22,17 +22,12 @@ const Auth = observer( () => {
     const isLoginPage = currentLocation.pathname === LOGIN_ROUTE;
 
     const signUp = async () => {
-        try {
-            const response = await registration(email, password);
+        const response = await registration(email, password);
 
-            user.setIsAuth(true);
-            user.setUser(response);
+        user.setIsAuth(true);
+        user.setUser(response);
 
-            navigate(HOME_ROUTE); 
-        }
-        catch(e) {
-            alert(e.response.data.message);
-        }
+         navigate(HOME_ROUTE); 
     }
 
     return (

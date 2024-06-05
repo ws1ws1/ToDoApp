@@ -1,5 +1,5 @@
 export const registration = async (email, password) => {
-    const response = await fetch('https://localhost:63131/api/User/Post', {
+    const response = await fetch('https://localhost:64999/api/User/Post', {
             method: 'POST',
             credentials: 'include',
             headers: {
@@ -18,10 +18,10 @@ export const registration = async (email, password) => {
 }
 
 export const getCurrentUser =  async () => {
-    const response = await fetch('https://localhost:63131/api/User/Get', {
+    const response = await fetch('https://localhost:64999/api/User/Get', {
         method: 'GET',
         credentials: 'include'
-    }); 
+    });
 
     if (response.status !== 200){
         return null;

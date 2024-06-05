@@ -10,8 +10,10 @@ function App() {
 
   useEffect( () => {
     getCurrentUser().then(data => {
-      user.setUser(data);
-      user.setIsAuth(true);
+      if (data !== null){
+        user.setUser(data);
+        user.setIsAuth(true);
+      }
     })
   }, []);
 
