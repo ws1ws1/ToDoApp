@@ -43,7 +43,9 @@ namespace ToDoApp.WebApi.Controllers
                 var userSessionCash = new UserSessionCash { Email = userRegistration.Email };
                 await _userSession.Add(userSessionCash);
 
-                return Ok();
+                var userInformation = new UserInformation { Email = userRegistration.Email};
+
+                return Ok(userInformation);
             }
 
             return BadRequest();
