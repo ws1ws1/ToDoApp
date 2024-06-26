@@ -2,7 +2,31 @@ version: '3.4'
 
 services:
   todoapp.webapi:
+    depends_on:
+      - postgres
+      - redis
     image: ${DOCKER_REGISTRY-}todoappwebapi
     build:
       context: .
-      dockerfile: src\ToDoApp.WebApi\Dockerfile
+      dockerfile: src/ToDoApp.WebApi/Dockerfile
+
+  todoapp.reactclient:
+    depends_on:
+      - todoapp.webapi
+    image: ${DOCKER_REGISTRY-}todoappreactclient
+    build:
+      context: .
+      dockerfile: src/ToDoApp.ReactClient/Dockerfile
+
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: ToDo
+
+  redis:
+    image: redis
+    restart: always  
+  

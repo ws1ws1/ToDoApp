@@ -1,19 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.6.33801.468
+VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{FBE75B21-0A95-4B40-B115-AB3329B6DD4E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoApp.WebApi", "src\ToDoApp.WebApi\ToDoApp.WebApi.csproj", "{3FCF4A4F-6FED-4120-B66C-A97FDA8995EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoApp.Scheduler", "src\ToDoApp.Scheduler\ToDoApp.Scheduler.csproj", "{E8D8F332-20F0-44F5-87A6-4A51174FA160}"
-EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{245D004A-3FED-45A6-B122-B0F0EA00ACA4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoApp.Scheduler", "src\ToDoApp.Scheduler\ToDoApp.Scheduler.csproj", "{E8D8F332-20F0-44F5-87A6-4A51174FA160}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution items", "Solution items", "{B1D37221-85AB-45A5-9C1A-57E63D73C90D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoApp.EmailSender", "src\ToDoApp.EmailSender\ToDoApp.EmailSender.csproj", "{CCA21BD2-C052-407F-AB60-8E34D1A7E0C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoApp.EmailSender", "src\ToDoApp.EmailSender\ToDoApp.EmailSender.csproj", "{CCA21BD2-C052-407F-AB60-8E34D1A7E0C2}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{C4001168-3450-4787-91A3-71D7DF6F3796}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,14 +29,14 @@ Global
 		{E8D8F332-20F0-44F5-87A6-4A51174FA160}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E8D8F332-20F0-44F5-87A6-4A51174FA160}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E8D8F332-20F0-44F5-87A6-4A51174FA160}.Release|Any CPU.Build.0 = Release|Any CPU
-		{245D004A-3FED-45A6-B122-B0F0EA00ACA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{245D004A-3FED-45A6-B122-B0F0EA00ACA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{245D004A-3FED-45A6-B122-B0F0EA00ACA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{245D004A-3FED-45A6-B122-B0F0EA00ACA4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CCA21BD2-C052-407F-AB60-8E34D1A7E0C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CCA21BD2-C052-407F-AB60-8E34D1A7E0C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CCA21BD2-C052-407F-AB60-8E34D1A7E0C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CCA21BD2-C052-407F-AB60-8E34D1A7E0C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4001168-3450-4787-91A3-71D7DF6F3796}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4001168-3450-4787-91A3-71D7DF6F3796}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4001168-3450-4787-91A3-71D7DF6F3796}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4001168-3450-4787-91A3-71D7DF6F3796}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -44,8 +44,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{3FCF4A4F-6FED-4120-B66C-A97FDA8995EC} = {FBE75B21-0A95-4B40-B115-AB3329B6DD4E}
 		{E8D8F332-20F0-44F5-87A6-4A51174FA160} = {FBE75B21-0A95-4B40-B115-AB3329B6DD4E}
-		{245D004A-3FED-45A6-B122-B0F0EA00ACA4} = {B1D37221-85AB-45A5-9C1A-57E63D73C90D}
 		{CCA21BD2-C052-407F-AB60-8E34D1A7E0C2} = {FBE75B21-0A95-4B40-B115-AB3329B6DD4E}
+		{C4001168-3450-4787-91A3-71D7DF6F3796} = {B1D37221-85AB-45A5-9C1A-57E63D73C90D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D3969DBF-0132-4E06-80DE-0B1856F86269}
