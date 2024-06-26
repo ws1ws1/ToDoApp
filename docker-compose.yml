@@ -10,6 +10,14 @@ services:
       context: .
       dockerfile: src/ToDoApp.WebApi/Dockerfile
 
+  todoapp.reactclient:
+    depends_on:
+      - todoapp.webapi
+    image: ${DOCKER_REGISTRY-}todoappreactclient
+    build:
+      context: .
+      dockerfile: src/ToDoApp.ReactClient/Dockerfile
+
   postgres:
     image: postgres
     restart: always
@@ -20,4 +28,5 @@ services:
 
   redis:
     image: redis
-    restart: always 
+    restart: always  
+  
